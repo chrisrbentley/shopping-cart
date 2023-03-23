@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from './Header';
 
-function Shop() {
+function Cart() {
   return (
     <div>
       <Header />
-      This is the shop
+      This is the cart
     </div>
   );
 }
 
-export default Shop;
+export default Cart;
