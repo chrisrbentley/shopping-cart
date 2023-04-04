@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
+import { Link } from 'react-router-dom';
 
 function Shop(props) {
   const { cart } = props;
@@ -7,10 +8,6 @@ function Shop(props) {
   const [products, setProducts] = useState([]);
 
   async function getProducts() {
-    /* const response = await fetch('https://api.escuelajs.co/api/v1/products', {
-      mode: 'cors',
-    }); */
-
     const response = await fetch('https://fakestoreapi.com/products', {
       mode: 'cors',
     });
@@ -18,10 +15,6 @@ function Shop(props) {
     const productData = await response.json();
     console.log(productData);
     setProducts(productData);
-
-    /* const slicedData = productData.slice(0, 20);
-    setProducts(slicedData);
-    console.log(slicedData); */
   }
 
   useEffect(() => {
@@ -35,18 +28,20 @@ function Shop(props) {
         <div id="products">
           {products.map((product) => {
             return (
-              <div
-                className="product"
-                key={product.id}
-              >
-                <img
-                  src={product.image}
-                  alt=""
-                  className="product-img"
-                />
-                <h3>{product.title}</h3>
-                <p className="price">${product.price}</p>
-              </div>
+              <Link to={`/shop/${product.id}`}>
+                <div
+                  className="product"
+                  key={product.id}
+                >
+                  <img
+                    src={product.image}
+                    alt=""
+                    className="product-img"
+                  />
+                  <h3>{product.title}</h3>
+                  <p className="price">${product.price}</p>
+                </div>
+              </Link>
             );
           })}
         </div>
