@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import Header from './Header';
 import { useParams } from 'react-router-dom';
 
-function Product() {
+// maybe useEffect to render a dom element
+
+function Product(props) {
+  const { cart, setCart, amount, setAmount } = props;
+  // const [amount, setAmount] = useState(1);
+
   const params = useParams();
 
   useEffect(() => {
@@ -20,23 +26,28 @@ function Product() {
     setProduct(item);
   };
 
+  const addToCart = () => {
+    let updatedCart = [...cart];
+
+    let newProduct = product;
+    newProduct.quantity = 1;
+    setProduct(newProduct);
+
+    updatedCart.push(product);
+
+    setCart(updatedCart);
+  };
+
   return (
     <div>
+      <Header cart={cart} />
       <h3>{product.title}</h3>
       <p>{product.description}</p>
       <img
         src={product.image}
         alt=""
       />
-      <div>
-        <input
-          type="number"
-          name=""
-          id=""
-          placeholder="1"
-        />
-        <button>Add to Cart</button>
-      </div>
+      <button onClick={addToCart}>Add to Cart</button>
     </div>
   );
 }
