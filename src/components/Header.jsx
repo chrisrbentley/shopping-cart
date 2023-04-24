@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Header(props) {
   const { cart } = props;
-  console.log(props);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+
+  useEffect(() => {
+    console.log('ah');
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+      total += cart[i].quantity;
+      console.log(total);
+    }
+    setTotalQuantity(total);
+  }, [cart]);
 
   return (
     <header>
@@ -17,7 +27,7 @@ function Header(props) {
             <Link to="/shop">Shop</Link>
           </li>
           <li>
-            <Link to="/cart">Cart ({cart.length})</Link>
+            <Link to="/cart">Cart ({totalQuantity})</Link>
           </li>
         </ul>
       </nav>
