@@ -2,16 +2,24 @@ import React from 'react';
 import Header from './Header';
 
 function Cart(props) {
-  const { cart, setCart, amount, setAmount } = props;
+  const { cart, setCart } = props;
 
   const updateAmount = (e) => {
     let val = Number(e.target.value);
     let id = Number(e.target.dataset.id);
-    let tempCart = cart;
+    let tempCart = [...cart];
+    let index = tempCart.findIndex((x) => x.id === id);
 
-    let item = tempCart.find((x) => x.id === id);
-    item.quantity = val;
+    tempCart[index].quantity = val;
+    setCart(tempCart);
+  };
 
+  const removeItem = (e) => {
+    const id = Number(e.target.dataset.id);
+    const tempCart = [...cart];
+    const index = tempCart.findIndex((x) => x.id === id);
+
+    tempCart.splice(index, 1);
     setCart(tempCart);
   };
 
@@ -29,14 +37,19 @@ function Cart(props) {
             <p className="cart-item-title">{item.title}</p>
             <input
               type="number"
-              // defaultValue={amount}
               defaultValue={item.quantity}
               data-id={item.id}
               onChange={updateAmount}
+              min={1}
               name=""
               id=""
             />
-            <button>Remove</button>
+            <button
+              data-id={item.id}
+              onClick={removeItem}
+            >
+              Remove
+            </button>
           </div>
         );
       })}
