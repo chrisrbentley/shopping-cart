@@ -39,15 +39,23 @@ function Product(props) {
   };
 
   return (
-    <div>
+    <div id="product-component">
       <Header cart={cart} />
-      <h3>{product.title}</h3>
-      <p>{product.description}</p>
-      <img
-        src={product.image}
-        alt=""
-      />
-      <button onClick={addToCart}>Add to Cart</button>
+      <div id="current-item">
+        <h3>{product.title}</h3>
+        <p>{product.description}</p>
+        <img
+          src={product.image}
+          alt=""
+          className="product-page-pic"
+        />
+        <button
+          onClick={addToCart}
+          id="add-to-cart"
+        >
+          Add to Cart
+        </button>
+      </div>
     </div>
   );
 }

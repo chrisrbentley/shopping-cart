@@ -24,35 +24,39 @@ function Cart(props) {
   };
 
   return (
-    <div>
+    <div id="cart-page">
       <Header cart={cart} />
-      <h3>Your Cart</h3>
-      {cart.map((item) => {
-        return (
-          <div className="cart-item">
-            <img
-              src={item.image}
-              alt=""
-            />
-            <p className="cart-item-title">{item.title}</p>
-            <input
-              type="number"
-              defaultValue={item.quantity}
-              data-id={item.id}
-              onChange={updateAmount}
-              min={1}
-              name=""
-              id=""
-            />
-            <button
-              data-id={item.id}
-              onClick={removeItem}
-            >
-              Remove
-            </button>
-          </div>
-        );
-      })}
+      <h3 id="cart-subheader">Your Cart</h3>
+      <div id="cart-wrapper">
+        {cart.map((item) => {
+          return (
+            <div className="cart-item">
+              <img
+                src={item.image}
+                alt=""
+              />
+              <p className="cart-item-title">{item.title}</p>
+              <div className="item-controls">
+                <input
+                  type="number"
+                  defaultValue={item.quantity}
+                  data-id={item.id}
+                  onChange={updateAmount}
+                  min={1}
+                  name=""
+                  id=""
+                />
+                <button
+                  data-id={item.id}
+                  onClick={removeItem}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
