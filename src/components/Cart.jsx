@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 
 function Cart(props) {
   const { cart, setCart } = props;
+  const [cartEmpty, setCartEmpty] = useState();
+
+  useEffect(() => {
+    if (cart.length < 1) {
+      setCartEmpty(true);
+    } else {
+      setCartEmpty(false);
+    }
+  }, [cart]);
 
   const updateAmount = (e) => {
     let val = Number(e.target.value);
@@ -27,36 +36,40 @@ function Cart(props) {
     <div id="cart-page">
       <Header cart={cart} />
       <h3 id="cart-subheader">Your Cart</h3>
-      <div id="cart-wrapper">
-        {cart.map((item) => {
-          return (
-            <div className="cart-item">
-              <img
-                src={item.image}
-                alt=""
-              />
-              <p className="cart-item-title">{item.title}</p>
-              <div className="item-controls">
-                <input
-                  type="number"
-                  defaultValue={item.quantity}
-                  data-id={item.id}
-                  onChange={updateAmount}
-                  min={1}
-                  name=""
-                  id=""
+      {cartEmpty ? (
+        <p id="cart-empty">Your cart is empty.</p>
+      ) : (
+        <div id="cart-wrapper">
+          {cart.map((item) => {
+            return (
+              <div className="cart-item">
+                <img
+                  src={item.image}
+                  alt=""
                 />
-                <button
-                  data-id={item.id}
-                  onClick={removeItem}
-                >
-                  Remove
-                </button>
+                <p className="cart-item-title">{item.title}</p>
+                <div className="item-controls">
+                  <input
+                    type="number"
+                    defaultValue={item.quantity}
+                    data-id={item.id}
+                    onChange={updateAmount}
+                    min={1}
+                    name=""
+                    id=""
+                  />
+                  <button
+                    data-id={item.id}
+                    onClick={removeItem}
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
