@@ -6,11 +6,9 @@ function Header(props) {
   const [totalQuantity, setTotalQuantity] = useState(0);
 
   useEffect(() => {
-    console.log('ah');
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
       total += cart[i].quantity;
-      console.log(total);
     }
     setTotalQuantity(total);
   }, [cart]);

@@ -35,14 +35,17 @@ function Cart(props) {
   return (
     <div id="cart-page">
       <Header cart={cart} />
-      <h3 id="cart-subheader">Your Cart</h3>
+      {/* <h3 id="cart-subheader">Your Cart</h3> */}
       {cartEmpty ? (
         <p id="cart-empty">Your cart is empty.</p>
       ) : (
         <div id="cart-wrapper">
           {cart.map((item) => {
             return (
-              <div className="cart-item">
+              <div
+                className="cart-item"
+                key={item.id}
+              >
                 <img
                   src={item.image}
                   alt=""

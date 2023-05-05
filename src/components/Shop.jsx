@@ -23,7 +23,7 @@ function Shop(props) {
   }, []);
 
   return (
-    <div id="store-container">
+    <div>
       <Header cart={cart} />
       <main id="p-wrapper">
         <div id="products">
@@ -33,6 +33,7 @@ function Shop(props) {
                 product={product}
                 cart={cart}
                 setCart={setCart}
+                key={product.id}
               />
             );
           })}
