@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
+import ShopItem from './ShopItem';
 import { Link } from 'react-router-dom';
 
 function Shop(props) {
-  const { cart } = props;
+  const { cart, setCart } = props;
 
   const [products, setProducts] = useState([]);
 
@@ -28,20 +29,11 @@ function Shop(props) {
         <div id="products">
           {products.map((product) => {
             return (
-              <Link to={`/shop/${product.id}`}>
-                <div
-                  className="product"
-                  key={product.id}
-                >
-                  <img
-                    src={product.image}
-                    alt=""
-                    className="product-img"
-                  />
-                  <h3>{product.title}</h3>
-                  <p className="price">${product.price}</p>
-                </div>
-              </Link>
+              <ShopItem
+                product={product}
+                cart={cart}
+                setCart={setCart}
+              />
             );
           })}
         </div>

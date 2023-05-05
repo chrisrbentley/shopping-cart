@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Shop from './components/Shop';
 import Cart from './components/Cart';
-import Product from './components/Product';
 
 const RouteSwitch = () => {
   const [cart, setCart] = useState([]);
+  const [amount, setAmount] = useState(1);
 
   return (
     <BrowserRouter>
@@ -17,15 +17,23 @@ const RouteSwitch = () => {
         />
         <Route
           path="/shop"
-          element={<Shop cart={cart} />}
+          element={
+            <Shop
+              cart={cart}
+              setCart={setCart}
+            />
+          }
         />
         <Route
           path="/cart"
-          element={<Cart cart={cart} />}
-        />
-        <Route
-          path="/shop/:id"
-          element={<Product />}
+          element={
+            <Cart
+              cart={cart}
+              setCart={setCart}
+              amount={amount}
+              setAmount={setAmount}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>
