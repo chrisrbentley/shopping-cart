@@ -4,6 +4,7 @@ import Header from './Header';
 function Cart(props) {
   const { cart, setCart } = props;
   const [cartEmpty, setCartEmpty] = useState();
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     if (cart.length < 1) {
@@ -32,10 +33,28 @@ function Cart(props) {
     setCart(tempCart);
   };
 
+  function calculateTotal() {
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].quantity > 1) {
+        for (let j = 0; j < cart[i].quantity; j++) {
+          total += cart[i].price;
+        }
+      } else {
+        total += cart[i].price;
+      }
+    }
+    total = total.toFixed(2);
+    setTotal(total);
+  }
+
+  useEffect(() => {
+    calculateTotal();
+  });
+
   return (
     <div id="cart-page">
       <Header cart={cart} />
-      {/* <h3 id="cart-subheader">Your Cart</h3> */}
       {cartEmpty ? (
         <p id="cart-empty">Your cart is empty.</p>
       ) : (
@@ -51,6 +70,8 @@ function Cart(props) {
                   alt=""
                 />
                 <p className="cart-item-title">{item.title}</p>
+                <p>${parseFloat(item.price * item.quantity).toFixed(2)}</p>
+
                 <div className="item-controls">
                   <input
                     type="number"
@@ -71,6 +92,8 @@ function Cart(props) {
               </div>
             );
           })}
+          <p>Subtotal: ${total}</p>
+          <button>Checkout</button>
         </div>
       )}
     </div>
