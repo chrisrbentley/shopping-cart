@@ -33,6 +33,7 @@ function ShopItem(props) {
           src={product.image}
           alt=""
           className="product-img"
+          data-testid="imgTest"
         />
       </div>
       <div className="product-bottom">
