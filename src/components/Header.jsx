@@ -25,7 +25,11 @@ function Header(props) {
             <Link to="/shop">Shop</Link>
           </li>
           <li>
-            <Link to="/cart">Cart ({totalQuantity})</Link>
+            {totalQuantity < 1 ? (
+              <Link to="/cart">Cart</Link>
+            ) : (
+              <Link to="/cart">Cart ({totalQuantity})</Link>
+            )}
           </li>
         </ul>
       </nav>
