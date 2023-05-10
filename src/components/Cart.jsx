@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
+import CartItem from './CartItem';
 
 function Cart(props) {
   const { cart, setCart } = props;
@@ -13,25 +14,6 @@ function Cart(props) {
       setCartEmpty(false);
     }
   }, [cart]);
-
-  const updateAmount = (e) => {
-    let val = Number(e.target.value);
-    let id = Number(e.target.dataset.id);
-    let tempCart = [...cart];
-    let index = tempCart.findIndex((x) => x.id === id);
-
-    tempCart[index].quantity = val;
-    setCart(tempCart);
-  };
-
-  const removeItem = (e) => {
-    const id = Number(e.target.dataset.id);
-    const tempCart = [...cart];
-    const index = tempCart.findIndex((x) => x.id === id);
-
-    tempCart.splice(index, 1);
-    setCart(tempCart);
-  };
 
   function calculateTotal() {
     let total = 0;
@@ -61,35 +43,12 @@ function Cart(props) {
         <div id="cart-wrapper">
           {cart.map((item) => {
             return (
-              <div
-                className="cart-item"
+              <CartItem
+                item={item}
+                cart={cart}
+                setCart={setCart}
                 key={item.id}
-              >
-                <img
-                  src={item.image}
-                  alt=""
-                />
-                <p className="cart-item-title">{item.title}</p>
-                <p>${parseFloat(item.price * item.quantity).toFixed(2)}</p>
-
-                <div className="item-controls">
-                  <input
-                    type="number"
-                    defaultValue={item.quantity}
-                    data-id={item.id}
-                    onChange={updateAmount}
-                    min={1}
-                    name=""
-                    id=""
-                  />
-                  <button
-                    data-id={item.id}
-                    onClick={removeItem}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
+              />
             );
           })}
           <p>Subtotal: ${total}</p>
