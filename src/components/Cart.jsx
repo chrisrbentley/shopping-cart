@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import CartItem from './CartItem';
 
-function Cart(props) {
-  const { cart, setCart } = props;
+function Cart({ cart, setCart }) {
   const [cartEmpty, setCartEmpty] = useState();
   const [total, setTotal] = useState(0);
 
@@ -35,27 +34,29 @@ function Cart(props) {
   });
 
   return (
-    <div id="cart-page">
+    <>
       <Header cart={cart} />
-      {cartEmpty ? (
-        <p id="cart-empty">Your cart is empty.</p>
-      ) : (
-        <div id="cart-wrapper">
-          {cart.map((item) => {
-            return (
-              <CartItem
-                item={item}
-                cart={cart}
-                setCart={setCart}
-                key={item.id}
-              />
-            );
-          })}
-          <p>Subtotal: ${total}</p>
-          <button>Checkout</button>
-        </div>
-      )}
-    </div>
+      <main>
+        {cartEmpty ? (
+          <p id="cart-empty">Your cart is empty.</p>
+        ) : (
+          <div id="cart-wrapper">
+            {cart.map((item) => {
+              return (
+                <CartItem
+                  item={item}
+                  cart={cart}
+                  setCart={setCart}
+                  key={item.id}
+                />
+              );
+            })}
+            <p>Subtotal: ${total}</p>
+            <button>Checkout</button>
+          </div>
+        )}
+      </main>
+    </>
   );
 }
 

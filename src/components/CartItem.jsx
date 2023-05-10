@@ -1,8 +1,6 @@
 import React from 'react';
 
 const CartItem = ({ item, cart, setCart }) => {
-  console.log(item);
-
   const updateAmount = (e) => {
     let val = Number(e.target.value);
     let id = Number(e.target.dataset.id);
