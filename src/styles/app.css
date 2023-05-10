@@ -175,3 +175,15 @@ header > h1 {
 #cart-empty {
   text-align: center;
 }
+
+#home-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#home-pic {
+  width: 80vw;
+  max-height: 80vh;
+}
