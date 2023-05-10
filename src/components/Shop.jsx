@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import ShopItem from './ShopItem';
-import { Link } from 'react-router-dom';
 
 function Shop(props) {
   const { cart, setCart } = props;
@@ -14,7 +13,6 @@ function Shop(props) {
     });
 
     const productData = await response.json();
-    console.log(productData);
     setProducts(productData);
   }
 
@@ -23,10 +21,13 @@ function Shop(props) {
   }, []);
 
   return (
-    <div>
+    <>
       <Header cart={cart} />
       <main id="p-wrapper">
-        <div id="products">
+        <div
+          id="products"
+          data-testid="productId"
+        >
           {products.map((product) => {
             return (
               <ShopItem
@@ -39,7 +40,7 @@ function Shop(props) {
           })}
         </div>
       </main>
-    </div>
+    </>
   );
 }
 
